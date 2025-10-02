@@ -1,0 +1,17 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "🔍 Running pre-commit checks..."
+echo "🎨 Running Prettier and ESLint..."
+
+# Run lint-staged and store the exit code
+npx lint-staged
+RESULT=$?
+
+if [ $RESULT -eq 0 ]; then
+  echo "✅ Code formatting and linting passed!"
+  exit 0
+else
+  echo "❌ Code formatting and linting failed. Please fix the issues above."
+  exit 1
+fi
